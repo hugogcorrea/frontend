@@ -121,6 +121,7 @@
 
 <script>
 import axios from "axios";
+const api = 'https://hugoapp-server.herokuapp.com/'
 export default {
   name: "Estado",
   data() {
@@ -151,7 +152,7 @@ export default {
   },
   methods: {
     listarTodos: function() {
-      axios.get("/estados").then(response => (this.estados = response.data));
+      axios.get("https://hugoapp-server.herokuapp.com/estados").then(response => (this.estados = response.data));
     },
     create: function() {
       if (this.nome.trim() == "") {
