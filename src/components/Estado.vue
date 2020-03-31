@@ -1,4 +1,12 @@
 
+<style>
+body {
+  background-color: #e6e6e6!important;
+}
+a {
+  color: #a8a8a8!important;
+}
+</style>
 <template>
   <div class="container card">
     <div>
@@ -202,11 +210,3 @@ export default {
   }
 };
 </script>
-<style>
-body {
-  background-color: #e6e6e6;
-}
-a {
-  color: #a8a8a8;
-}
-</style>
