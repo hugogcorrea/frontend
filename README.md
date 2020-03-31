@@ -3,6 +3,7 @@ Aplicação de cadastro de cidade de estado node e vue
 
 # Client
 Frontend desenvolvido em vue.js
+publicado em : https://hugoapp-frontend.herokuapp.com/
 
 ``` 
 # install dependencies
