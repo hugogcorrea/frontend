@@ -1,10 +1,10 @@
 
 <style>
 body {
-  background-color: #e6e6e6!important;
+  background-color: #e6e6e6 !important;
 }
 a {
-  color: #a8a8a8!important;
+  color: #a8a8a8 !important;
 }
 </style>
 <template>
@@ -106,7 +106,7 @@ a {
               <div class="col">
                 <a
                   href="#"
-                  v-on:click="openModalUpdate(index)"
+                  v-on:click="openModalUpdate(estado._id)"
                   id="'update' + index"
                   title="Alterar"
                   v-b-modal.modal_upd
@@ -126,10 +126,8 @@ a {
     </div>
   </div>
 </template>
-
 <script>
 import axios from "axios";
-const api = 'https://hugoapp-server.herokuapp.com/'
 export default {
   name: "Estado",
   data() {
@@ -160,7 +158,9 @@ export default {
   },
   methods: {
     listarTodos: function() {
-      axios.get("https://hugoapp-server.herokuapp.com/estados").then(response => (this.estados = response.data));
+      axios
+        .get("https://hugoapp-server.herokuapp.com/estados")
+        .then(response => (this.estados = response.data));
     },
     create: function() {
       if (this.nome.trim() == "") {
@@ -176,7 +176,7 @@ export default {
         abreviacao: this.abreviacao
       };
       axios
-        .post("/estados", estado)
+        .post("https://hugoapp-server.herokuapp.com/estados", estado)
         .then(response => this.estados.push(response.data));
     },
     update: function(index) {
@@ -185,7 +185,10 @@ export default {
       estado.abreviacao = this.abreviacao_upd;
       var obj;
       axios
-        .put("/estados/" + estado._id, estado)
+        .put(
+          "https://hugoapp-server.herokuapp.com/estados/" + estado._id,
+          estado
+        )
         .then(response => (obj = response.data));
       this.hideModal();
     },
@@ -194,12 +197,15 @@ export default {
       var estado = this.estados[index];
       this.estados.splice(index, 1);
       axios
-        .delete("/estados/" + estado._id)
+        .delete("https://hugoapp-server.herokuapp.com/estados/" + estado._id)
         .then(response => (estado = response.data));
       console.log(estado);
     },
-    openModalUpdate: function(index) {
-      var estado = this.estados[index];
+    openModalUpdate: function(_id) {
+      var estado = this.estados.find(function(estado) {        
+        return estado._id == _id;
+      });
+      console.log(estado, _id)
       this.estado_upd = estado;
       this.nome_upd = estado.nome;
       this.abreviacao_upd = estado.abreviacao;

@@ -1,3 +1,11 @@
+<style>
+body {
+  background-color: #e6e6e6 !important;
+}
+a {
+  color: #a8a8a8 !important;
+}
+</style>
 
 <template>
   <div class="container card">
@@ -86,7 +94,7 @@
               <td>
                 <a
                   href="#"
-                  v-on:click="openModalUpdate(index)"
+                  v-on:click="openModalUpdate(cidade._id)"
                   id="'update' + index"
                   title="Alterar"
                   v-b-modal.modal_upd
@@ -106,24 +114,12 @@
               </td>
             </tr>
           </tbody>
-        </table>
-        <!-- <div class="col-3" v-for="(cidade,index) in estado.cidades" v-bind:key="cidade._id">
-          <div class="card mb-2">
-            {{cidade.nome}}
-            <div class="row">
-              <div class="col text-right">
-             
-              </div>
-            </div>
-          </div>
-        </div>-->
+        </table>       
       </div>
     </div>
   </div>
 </template>
-
 <script>
-// import $ from "jquery";
 import axios from "axios";
 export default {
   name: "Cidade",
@@ -158,7 +154,7 @@ export default {
   methods: {
     listarTodos: function() {
       axios
-        .get("/cidades/" + this.$route.params._id)
+        .get("https://hugoapp-server.herokuapp.com/cidades/" + this.$route.params._id)
         .then(response => (this.estado = response.data));
     },
     create: function() {
@@ -170,43 +166,36 @@ export default {
         nome: this.nome,
         estadoId: this.$route.params._id
       };
-      axios.post("/cidades", cidade).then(response => (cidade = response.data));
-      console.log(cidade);
-      this.estado.cidades.push(cidade);
+      axios.post("https://hugoapp-server.herokuapp.com/cidades", cidade).then(response => (cidade = response.data));
+     this.estado.cidades.push(cidade)
     },
     update: function(index) {
-      var cidade = this.cidade_upd;
-      cidade.nome = this.nome_upd;
-      var obj;
+      var cidade = this.cidade_upd
+      cidade.nome = this.nome_upd
+      var obj
       axios
-        .put("/cidades/" + cidade._id, cidade)
-        .then(response => (this.cidade_return = response.data));
-      this.hideModal();
+        .put("https://hugoapp-server.herokuapp.com/cidades/" + cidade._id, cidade)
+        .then(response => (this.cidade_return = response.data))
+      this.hideModal()
     },
     remove: function(index) {
-      if (!confirm("Deseja excluir?")) return;
-      var cidade = this.estado.cidades[index];
-      this.estado.cidades.splice(index, 1);
+      if (!confirm("Deseja excluir?")) return
+      var cidade = this.estado.cidades[index]
+      this.estado.cidades.splice(index, 1)
       axios
-        .delete("/cidades/" + cidade._id)
-        .then(response => (this.cidade_return = response.data));
+        .delete("https://hugoapp-server.herokuapp.com/cidades/" + cidade._id)
+        .then(response => (this.cidade_return = response.data))
     },
-    openModalUpdate: function(index) {
-      var cidade = this.estado.cidades[index];
-      this.cidade_upd = cidade;
-      this.nome_upd = cidade.nome;
+    openModalUpdate: function(_id) {
+      var cidade = this.estado.cidades.find(function(cidade) {
+        return cidade._id == _id
+      })
+      this.cidade_upd = cidade
+      this.nome_upd = cidade.nome
     },
     hideModal() {
-      this.$refs["modal_upd"].hide();
+      this.$refs["modal_upd"].hide()
     }
   }
-};
+}
 </script>
-<style>
-body {
-  background-color: #e6e6e6;
-}
-a {
-  color: #a8a8a8;
-}
-</style>
