@@ -198,14 +198,12 @@ export default {
       this.estados.splice(index, 1);
       axios
         .delete("https://hugoapp-server.herokuapp.com/estados/" + estado._id)
-        .then(response => (estado = response.data));
-      console.log(estado);
+        .then(response => (estado = response.data));  
     },
     openModalUpdate: function(_id) {
       var estado = this.estados.find(function(estado) {        
         return estado._id == _id;
       });
-      console.log(estado, _id)
       this.estado_upd = estado;
       this.nome_upd = estado.nome;
       this.abreviacao_upd = estado.abreviacao;
