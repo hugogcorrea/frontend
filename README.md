@@ -1,14 +1,16 @@
-# client
+# Cadastro
+Aplicação de cadastro de cidade de estado node e vue
 
-> A Vue.js project
+# Client
+Frontend desenvolvido em vue.js
 
-## Build Setup
-
-``` bash
+``` 
 # install dependencies
 npm install
 
 # serve with hot reload at localhost:4000
-npm run dev
+npm run dev 
+ou
+yarn dev
 
 ```
