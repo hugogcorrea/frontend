@@ -20,6 +20,7 @@ a {
               aria-describedby="basic-addon1"
               v-model="nome_upd"
               id="nome_upd"
+              maxlength="250"
             />
           </div>
           <div class="col-1"></div>
@@ -47,6 +48,7 @@ a {
             aria-describedby="basic-addon1"
             v-model="nome"
             id="nome"
+            maxlength="250"
           />
         </div>
         <div class="col-1"></div>
@@ -119,6 +121,7 @@ a {
     </div>
   </div>
 </template>
+
 <script>
 import axios from "axios";
 export default {

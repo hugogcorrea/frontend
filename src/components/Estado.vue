@@ -20,6 +20,7 @@ a {
               aria-describedby="basic-addon1"
               v-model="nome_upd"
               id="nome_upd"
+              maxlength="250"
             />
           </div>
           <div class="col-1"></div>
@@ -31,6 +32,7 @@ a {
               aria-describedby="basic-addon1"
               v-model="abreviacao_upd"
               id="abreviacao_upd"
+              maxlength="2"
             />
           </div>
           <b-button class="m-3" variant="outline-primary" block @click="update">Salvar</b-button>
@@ -47,6 +49,7 @@ a {
             aria-describedby="basic-addon1"
             v-model="nome"
             id="nome"
+                  maxlength="250"
           />
         </div>
         <div class="col-1"></div>
@@ -58,6 +61,7 @@ a {
             aria-describedby="basic-addon1"
             v-model="abreviacao"
             id="abreviacao"
+                  maxlength="2"
           />
         </div>
         <div class="col-1">
@@ -198,10 +202,10 @@ export default {
       this.estados.splice(index, 1);
       axios
         .delete("https://hugoapp-server.herokuapp.com/estados/" + estado._id)
-        .then(response => (estado = response.data));  
+        .then(response => (estado = response.data));
     },
     openModalUpdate: function(_id) {
-      var estado = this.estados.find(function(estado) {        
+      var estado = this.estados.find(function(estado) {
         return estado._id == _id;
       });
       this.estado_upd = estado;
